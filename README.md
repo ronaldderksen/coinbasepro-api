@@ -12,9 +12,9 @@ We provide a synchronous and asynchronous client.  The only functional differenc
 **Synchronous Client**
 
 ```ruby
-require 'coinbase/pro'
+require 'coinbasepro/api'
 
-rest_api = Coinbase::Pro::Client.new(api_key, api_secret, api_pass)
+rest_api = Coinbasepro::Api::Client.new(api_key, api_secret, api_pass)
 while true
   sleep 10
   rest_api.last_trade(product_id: "BTC-GBP") do |resp|
@@ -26,10 +26,10 @@ end
 **Asynchronous Client**
 
 ```ruby
-require 'coinbase/pro'
+require 'coinbasepro/api'
 require 'eventmachine'
 
-rest_api = Coinbase::Pro::AsyncClient.new(api_key, api_secret, api_pass)
+rest_api = Coinbasepro::Api::AsyncClient.new(api_key, api_secret, api_pass)
 EM.run {
   EM.add_periodic_timer(10) {
     rest_api.last_trade(product_id: "BTC-GBP") do |resp|
@@ -44,7 +44,7 @@ EM.run {
 ### Installation
 
 ```
-$ gem install coinbase-pro
+$ gem install coinbasepro-api
 ```
 
 ### Initialization
@@ -53,11 +53,11 @@ To initialize the client, simply pass in an API Key, API Secret, and API Passphr
 * https://pro.coinbase.com/profile/api
 
 ```ruby
-rest_api = Coinbase::Pro::Client.new(api_key, api_secret, api_pass)
+rest_api = Coinbasepro::Api::Client.new(api_key, api_secret, api_pass)
 ```
 
 ```ruby
-rest_api = Coinbase::Pro::AsyncClient.new(api_key, api_secret, api_pass)
+rest_api = Coinbasepro::Api::AsyncClient.new(api_key, api_secret, api_pass)
 ```
 
 **Default Product**
@@ -65,7 +65,7 @@ rest_api = Coinbase::Pro::AsyncClient.new(api_key, api_secret, api_pass)
 Coinbase Pro supports trading bitcoin in several currencies.  If you wish to trade a different currency, you can specify an alternative default currency.
 
 ```ruby
-gbp_client = Coinbase::Pro::Client.new(api_key, api_secret, api_pass,
+gbp_client = Coinbasepro::Api::Client.new(api_key, api_secret, api_pass,
                                             product_id: "BTC-GBP")
 ```
 
@@ -74,7 +74,7 @@ gbp_client = Coinbase::Pro::Client.new(api_key, api_secret, api_pass,
 You can initialize a connection to the sandbox by specifying an alternative api endpoint.
 
 ```ruby
-sandbox = Coinbase::Pro::Client.new(api_key, api_secret, api_pass,
+sandbox = Coinbasepro::Api::Client.new(api_key, api_secret, api_pass,
                                           api_url: "https://public.sandbox.pro.coinbase.com")
 ```
 
@@ -421,16 +421,16 @@ We provide a websocket interface in the gem for convenience.  This is typically 
 Please consider setting the keepalive flag to true when initializing the websocket.  This will cause the websocket to proactively refresh the connection whenever it closes.
 
 ```ruby
-websocket = Coinbase::Pro::Websocket.new(keepalive: true)
+websocket = Coinbasepro::Api::Websocket.new(keepalive: true)
 ```
 
 Before starting the websocket, you should hook into whatever messages you're interested in by passing a block to the corresponding method.  The methods you can use for access are open, match, change, done, and error.  Additionally, you can use message to run a block on every websocket event.
 
 ```ruby
-require 'coinbase/pro'
+require 'coinbasepro/api'
 require 'eventmachine'
 
-websocket = Coinbase::Pro::Websocket.new(product_id: 'BTC-GBP',
+websocket = Coinbasepro::Api::Websocket.new(product_id: 'BTC-GBP',
                                               keepalive: true)
 websocket.match do |resp|
   p "Spot Rate: £ %.2f" % resp.price
@@ -452,9 +452,9 @@ end
 If started outside the reactor loop, the websocket client will use a very basic Eventmachine handler.
 
 ```ruby
-require 'coinbase/pro'
+require 'coinbasepro/api'
 
-websocket = Coinbase::Pro::Websocket.new(product_id: 'BTC-GBP')
+websocket = Coinbasepro::Api::Websocket.new(product_id: 'BTC-GBP')
 websocket.match do |resp|
   p "Spot Rate: £ %.2f" % resp.price
 end

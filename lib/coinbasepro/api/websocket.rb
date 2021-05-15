@@ -1,5 +1,5 @@
-module Coinbase
-  module Pro
+module Coinbasepro
+  module Api
     # Websocket client for Coinbase Pro
     class Websocket
       def initialize(options = {})

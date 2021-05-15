@@ -1,5 +1,5 @@
-module Coinbase
-  module Pro
+module Coinbasepro
+  module Api
     # Response item abstract model
     class APIObject < Hash
       def initialize(data)

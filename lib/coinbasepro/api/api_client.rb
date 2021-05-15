@@ -1,5 +1,5 @@
-module Coinbase
-  module Pro
+module Coinbasepro
+  module Api
     # Net-http client for Coinbase Pro API
     class APIClient
       def initialize(api_key = '', api_secret = '', api_pass = '', options = {})

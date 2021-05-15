@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Coinbase::Pro::AsyncClient do
+describe Coinbasepro::Api::AsyncClient do
   before :all do
-    @client = Coinbase::Pro::AsyncClient.new('api_pass',
+    @client = Coinbasepro::Api::AsyncClient.new('api_pass',
                                                   'api_key',
                                                   'api_secret')
   end
@@ -22,7 +22,7 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 400)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::BadRequestError
+    end.to raise_error Coinbasepro::Api::BadRequestError
   end
 
   it "raises NotAuthorizedError on 401" do
@@ -30,7 +30,7 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 401)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::NotAuthorizedError
+    end.to raise_error Coinbasepro::Api::NotAuthorizedError
   end
 
   it "raises ForbiddenError on 403" do
@@ -38,7 +38,7 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 403)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::ForbiddenError
+    end.to raise_error Coinbasepro::Api::ForbiddenError
   end
 
   it "raises NotFoundError on 404" do
@@ -46,7 +46,7 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 404)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::NotFoundError
+    end.to raise_error Coinbasepro::Api::NotFoundError
   end
 
   it "raises RateLimitError on 429" do
@@ -54,7 +54,7 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 429)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::RateLimitError
+    end.to raise_error Coinbasepro::Api::RateLimitError
   end
 
   it "raises InternalServerError on 500" do
@@ -62,6 +62,6 @@ describe Coinbase::Pro::AsyncClient do
       .to_return(body: mock_item.to_json, status: 500)
     expect do
       EM.run { @client.orders { EM.stop } }
-    end.to raise_error Coinbase::Pro::InternalServerError
+    end.to raise_error Coinbasepro::Api::InternalServerError
   end
 end

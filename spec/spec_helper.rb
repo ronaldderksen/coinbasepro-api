@@ -4,7 +4,7 @@ require 'em-http'
 
 Bundler.setup
 
-require 'coinbase/pro'
+require 'coinbasepro/api'
 
 MARKET_REFS   = [ :currencies,
                   :products,

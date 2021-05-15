@@ -1,5 +1,5 @@
-module Coinbase
-  module Pro
+module Coinbasepro
+  module Api
     #
     # Websocket Errors
     #

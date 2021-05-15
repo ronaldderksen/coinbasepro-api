@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'coinbase/pro/version'
+require 'coinbasepro/api/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "coinbase-pro"
-  spec.version       = Coinbase::Pro::VERSION
-  spec.authors       = ["Vertbase"]
-  spec.email         = ["dev@vertbase.com"]
+  spec.name          = "coinbasepro-api"
+  spec.version       = Coinbasepro::Api::VERSION
+  spec.authors       = ["Ronald Derksen"]
+  spec.email         = ["ronald@derksen-it.nl"]
 
   spec.summary       = "Client library for Coinbase Pro"
-  spec.homepage      = "https://github.com/vertbase/coinbase-pro"
+  spec.homepage      = "https://github.com/ronaldderksen/coinbasepro-api"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -1,5 +1,5 @@
-module Coinbase
-  module Pro
+module Coinbasepro
+  module Api
     # EM-Http Adapter
     class EMHTTPClient < APIClient
       def initialize(api_key = '', api_secret = '', api_pass = '', options = {})
