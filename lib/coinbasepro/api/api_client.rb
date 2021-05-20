@@ -145,6 +145,17 @@ module Coinbasepro
       #
       # Orders
       #
+
+      def do_order(params = {})
+        params[:product_id] ||= @default_product
+        out = nil
+        post("/orders", params) do |resp|
+          out = response_object(resp)
+          yield(out, resp) if block_given?
+        end
+        out
+      end
+
       def bid(amt, price, params = {})
         params[:product_id] ||= @default_product
         params[:size] = amt
@@ -292,6 +303,14 @@ module Coinbasepro
         get("/coinbase-accounts", params, paginate: true) do |resp|
           out = response_collection(resp)
           yield(out, resp) if block_given?
+        end
+        out
+      end
+
+      def fees(params = {})
+        out = nil
+        get("/fees") do |resp|
+          out = resp
         end
         out
       end
